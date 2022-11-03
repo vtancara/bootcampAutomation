@@ -56,7 +56,6 @@ public class BasicSeleniumTest {
         driver.findElement(By.id("NewItemContentInput")).sendKeys(nameTask);
         driver.findElement(By.id("NewItemAddButton")).click();
         Thread.sleep(1000);
-        System.out.println(driver.findElements(By.xpath("//td/div[text()='"+nameTask+"']")));
         actualResult=driver.findElements(By.xpath("//div[text()='"+nameTask+"']")).size();
         Assertions.assertTrue(actualResult >= 1
                 ,"ERROR The TASK was not created");
@@ -68,10 +67,8 @@ public class BasicSeleniumTest {
         nameTask=nameTask + new Date().getTime();
         driver.findElement(By.xpath("//td//div/textarea[@id='ItemEditTextbox']")).clear();
         driver.findElement(By.xpath("//td//div/textarea[@id='ItemEditTextbox']")).sendKeys(nameTask);
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//td//div/textarea[@id='ItemEditTextbox']")).sendKeys(Keys.RETURN);
-        Thread.sleep(2000);
-        actualResult=driver.findElements(By.xpath(" //td[text()='"+nameTask+"'] ")).size();
+        Thread.sleep(3000);
+        actualResult=driver.findElements(By.xpath("//td[contains(@class,'ItemContent')]//div[text()='"+nameTask+"']")).size();
         Assertions.assertTrue(actualResult >= 1
                 ,"ERROR The TASK was not updated");
     }
